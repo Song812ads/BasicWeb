@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+    body {
+        font-family:'Open Sans';
+    }
+    </style>
+    <title>Song Services</title>
+</head>
+<body>
+    <!-- nav: tao 1 khung thay doi theo kich thuoc mo rong cua file va thay doi kich thuoc thaeo noi dung ben trong-->
+    <nav class="navbar navbar-expand-md navbar-dark bg-success py-2"> 
+        <!-- container dung de can bang noi dung chua -->
+        <div class = "container"> 
+            <a href="#" class="navbar-brand">
+                SONG SERVICES DEMO
+            </a>
+            <!-- Tao 1 nut keo xuong lien ket voi list id navmenu -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Tao 1 list cac yeu cau trong navbar -->
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <il class="nav-item">
+                        <a href="#client" class="nav-link">
+                            CLIENT
+                        </a>
+                    </il>
+                    <il class="nav-item">
+                        <a href="#service" class="nav-link">
+                            SERVICE
+                        </a>
+                    </il>
+                    <il class="nav-item">
+                        <a href="#contact" class="nav-link">
+                            CONTACT
+                        </a>
+                    </il>
+                </ul>
+            </div>
+        </div>
+        <!-- Thuong di chung voi href de trich duong dan de = # de k trich dan -->
+    </nav>
+    
+    <!-- padding top bottom x-axis y-axis p-5:around -->
+    <section class="bg-dark text-light p-5 p-lg-4 text-sm-start">
+        <div class="container">
+            <!-- Flexbox -->
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <div class="w-75">
+                    <h1 class="text-warning">About The Service</h1>
+                    <p class="lead my-4">
+                        <span style="color: deepskyblue">This page is created by React, Bootstrap for Frontend and some API for Backend:</span><br>
+                        REST API with Relative Database (Postgresql) and Non-SQL (MongodB) <br>
+                        Use OAUth2.0 Server to authorize and implement Log in with SSL using JWT<br>
+                        Build microservice with API gateway, use Kafka to handle the message between services<br>
+                        Trace with Zipkin, build cache with NGINX<br> 
+                        You can try the Client-Supplier Service with the button below and watch how server control
+                    </p>
+                    <div class="d-md-inline justify-content-between ">
+                        <button style="margin-right:50px" class="btn btn-primary btn-lg ">
+                            Explain Service Supply
+                        </button>
+                        <button style="margin-right:50px" class="btn btn-primary btn-lg" id="client">
+                            Try Client Service
+                        </button>
+                        <button style="margin-right:50px" class="btn btn-primary btn-lg" id ="service">
+                            Try Supplier Service
+                        </button>
+                    </div>
+
+                </div> 
+                <img class="img-fluid w-25 d-none d-sm-block" src="anh1.png" alt=""></img>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-secondary text-light p-3">                
+        <div class="container">
+            <div class="d-md-flex  justify-content-between align-items-center">
+                <h3 class="mb-3 mb-md-0">
+                    Watch Client Service Control:  
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="p-5">
+        <div class="container">
+            <div class="row" text-center>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+                            <p class="card-text">
+                                Portgresql, OAuth2, SSL-JWT
+                            </p> 
+                            <button class="btn btn-secondary">
+                                User Register Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-bar-chart-fill"></i>
+                            </div>
+                            <p class="card-text">
+                                Portgresql
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Client Request Tracking
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-eyeglasses"></i>
+                            </div>
+                            <p class="card-text">
+                                Zipkin
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Client Tracing
+                            </button>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-secondary text-light p-3">                
+        <div class="container">
+            <div class="d-md-flex  justify-content-between align-items-center">
+                <h3 class="mb-3 mb-md-0">
+                    Watch Supplier Control Service 
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="p-5">
+        <div class="container">
+            <div class="row" text-center>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+                            <p class="card-text">
+                                MongoDB, OAuth2, SSL-JWT
+                            </p> 
+                            <button class="btn btn-secondary">
+                               Supplier Register Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-bar-chart-fill"></i>
+                            </div>
+                            <p class="card-text">
+                                MongoDB
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Client Request Tracking from Supplier
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-eyeglasses"></i>
+                            </div>
+                            <p class="card-text">
+                                Zipkin
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Supplier Tracing
+                            </button>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-secondary text-light p-3">                
+        <div class="container">
+            <div class="d-md-flex  justify-content-between align-items-center">
+                <h3 class="mb-3 mb-md-0">
+                    Another Service 
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="p-5">
+        <div class="container">
+            <div class="row" text-center>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-bar-chart-line-fill"></i>
+                            </div>
+                            <p class="card-text">
+                                Postgresql, OAuth2, SSL-JWT
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Supplier Ready Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+                            <p class="card-text">
+                                NGINX cache
+                            </p> 
+                            <button class="btn btn-secondary">
+                                NGINX Control
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light">
+                        <div class="card-body text-center">
+                            <div class="h1 mb-3">
+                                <i class="bi bi-door-open"></i>
+                            </div>
+                            <p class="card-text">
+                                Kafka Microservice
+                            </p> 
+                            <button class="btn btn-secondary">
+                                Kafka Control
+                            </button>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="bg-dark text-light p-5 p-lg-4 text-sm-start">
+        <div class="container">
+            <!-- Flexbox -->
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <img class="img-fluid w-25 d-none d-sm-block" src="anh2.svg" alt=""></img>
+                <div class="w-50">
+                    <h1 >CONTACT:</h1>
+                    <p>
+                        This project is created after learning the concept of <a href="https://www.youtube.com/watch?v=4sosXZsdy-s" target="_blank" rel="noopener noreferrer">Bootstrap</a>,   
+                            <a href="https://www.youtube.com/@DailyCodeBuffer" target="_blank" rel="noopener noreferrer">Spring Framework</a>. <br>If you enjoy this app, contact me: <br>
+                        Name: Tran Ngoc Minh Song<br>
+                        SDT: 0934995090<br>
+                        Email: songtran91105712@gmail.com<br>
+                        LinkedIn: <br>
+                    </p>
+                </div> 
+                
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
