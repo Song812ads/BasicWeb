@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.clientsecuritycache.model.UserLogIn;
@@ -31,6 +32,8 @@ public class UserServiceImp implements UserService {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private VerifyRepository verifyRepository;
@@ -42,8 +45,11 @@ public class UserServiceImp implements UserService {
 		
 		List<UserLogIn> users = mongoTemplate.find(query,UserLogIn.class);
 		if  (!users.isEmpty()) {return false; }
-		else {return true;
-		
+		else {
+		userLogIn.setPassword(passwordEncoder.encode(userLogIn.getPassword()));
+//		userLogIn.setRole("ROLE_USER");
+		userRepository.save(userLogIn); 
+		return true;
 		}
 	}
 
@@ -55,13 +61,12 @@ public class UserServiceImp implements UserService {
 		if  (users.isEmpty()) return "Ten dang nhap khong ton tai"; 
 		else {
 			UserLogIn target = users.get(0);
-			if (!target.getPassword().equals(password)) {
+			if (!passwordEncoder.matches(password, target.getPassword())) {
 				return "Pass sai hay nhap lai";
 			}
 			return "Login success";
  		}
 	}
-	
 
 
 	@Override
@@ -138,7 +143,7 @@ public class UserServiceImp implements UserService {
 		
 		String mail = user.getEmail();
 		UserLogIn userpass = mongoTemplate.findOne(Query.query(Criteria.where("email").is(mail)), UserLogIn.class);
-		userpass.setPassword(pass);
+		userpass.setPassword(passwordEncoder.encode(pass));
 		return true;
 	}
     

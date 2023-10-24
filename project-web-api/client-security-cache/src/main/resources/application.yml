@@ -1,0 +1,42 @@
+spring:
+ application:
+  name: client-security-cache
+ data:
+  mongodb:
+   uri: mongodb://admin:password@localhost:8912/
+   database: userPassword
+   username: admin
+   password: password
+ security:
+  oauth2:
+   resourceserver:
+    jwt:
+     jwk-set-uri: http://localhost:8920/auth/realms/Song_control/protocol/openid-connect/certs
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    
+management:
+ tracing:
+  sampling:
+   probability: 1.0
+      
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://localhost:8761/eureka/
+    
+server:
+ port: 8123
+    
+
+
+

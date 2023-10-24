@@ -7,11 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,31 +20,28 @@ import com.example.clientsecuritycache.model.UserLogIn;
 import com.example.clientsecuritycache.service.UserService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
 
-@CrossOrigin(origins = "http://localhost:8111")
+//@CrossOrigin
 @RestController
 @RequestMapping("/app/user")
 @Slf4j
 public class UserController {
-	
-
 	//define 1 loi vao mo hinh service:
 	@Autowired
 	private UserService userService;
-	
-	// 1 y cau dien ra de luu du lieu => luu vao model thong qua service
-	
+
 	@PostMapping("/register")
-    public ResponseEntity<Map<String, Boolean>> save(@RequestBody UserLogIn userLogIn) throws IOException, InterruptedException {
+    public ResponseEntity<Map<String, Boolean>> savethem(@RequestBody UserLogIn userLogIn) throws IOException, InterruptedException {
         boolean check = userService.save(userLogIn);
+        log.info(userLogIn.toString());
 		Map<String,Boolean> response = new HashMap<>();
 		response.put("confirm",check);
         return ResponseEntity.ok().body(response);
     }
-	
+
 	@PostMapping("/log")
 	public ResponseEntity<Map<String,String>> checklogin(@RequestBody ObjectNode objectNode){
 		String name = objectNode.get("name").asText();
@@ -53,15 +51,13 @@ public class UserController {
 		response.put("confirm",check);
 		return ResponseEntity.ok().body(response);		
 	}
-	
+
 	@PostMapping("/forget")
     public  ResponseEntity<Map<String, Object>> checkMail(@RequestBody ObjectNode objectNode)  {
 		String mail = objectNode.get("mail").asText();
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Accept-Encoding", "gzip");
 		Map<String, Object> check = userService.checkMail(mail);
-		log.info(check.toString());
-		
         return ResponseEntity.ok()
         		.headers(responseHeaders)
         		.body(check);
@@ -90,6 +86,27 @@ public class UserController {
 	  return ResponseEntity.ok().body(check);
    }
 
-    
-	
+   @GetMapping("/hello")
+   @PreAuthorize("hasRole('client_user')")
+   public ResponseEntity<Map<String,String>> hello() {
+		Map<String,String> response = new HashMap<>();
+		response.put("confirm","Hello");
+		return ResponseEntity.ok().body(response);	
+   }
+   
+   @RequestMapping(value = "/hello-2", method = RequestMethod.GET)
+   @PreAuthorize("hasRole('client_admin')")
+   public ResponseEntity<Map<String,String>> hello2() {
+		Map<String,String> response = new HashMap<>();
+		response.put("confirm","Hello2");
+		return ResponseEntity.ok().body(response);	
+   }
+   
+   @GetMapping("/fetch")
+   @PreAuthorize("hasRole('client_user')")
+   public ResponseEntity<Flux<Map<String,String>>> fetch(){
+	   
+	   return ResponseEntity.ok().build();
+   }
+
 }

@@ -1,0 +1,39 @@
+server:
+ port: 8060
+
+eureka:
+ client:
+  serviceUrl:
+   defaultZone: http://localhost:8761/eureka/
+  register-with-eureka: false
+  fetch-registry: false
+      
+management:
+ tracing:
+  sampling:
+   probability: 1.0
+      
+      
+spring:
+ application:
+  name: api-gateway
+ cloud:
+  gateway:
+   routes:
+    - id: client-security-cache
+      uri: http://localhost:8123
+      predicates: 
+       - Path=/app/user/**
+    - id: supply_service
+      uri: http://localhost:8321
+      predicates: 
+       - Path=/product/**
+   
+   globalcors:
+    corsConfigurations:
+     '[/**]':
+      allowedOrigins: "*"
+      allowedHeaders: "*"
+      allowedMethods:
+      - GET
+      - POST       

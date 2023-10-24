@@ -11,6 +11,7 @@ public interface UserRepository extends MongoRepository<UserLogIn, String> {
 	
     @Query("{email:'?0'}")
     UserLogIn findItemByEmail(String email);
+
     
 
 }

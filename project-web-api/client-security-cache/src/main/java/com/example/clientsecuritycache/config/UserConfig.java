@@ -1,24 +1,30 @@
 package com.example.clientsecuritycache.config;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancedExchangeFilterFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-
 public class UserConfig {
-	@Bean
-	public RestTemplate restTemplate(List<HttpMessageConverter<?>> messageConverters) {
-	    return new RestTemplate(messageConverters);
-	}
+  	@Autowired
+    private LoadBalancedExchangeFilterFunction filterFunction;
 
-	@Bean
-	public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
-	    return new ByteArrayHttpMessageConverter();
-	}
-
+    @Bean
+    @LoadBalanced
+    public WebClient employeeWebClient() {
+        return WebClient.builder()
+                .baseUrl("http://client-security-cache")
+                .filter(filterFunction)
+                .build();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
