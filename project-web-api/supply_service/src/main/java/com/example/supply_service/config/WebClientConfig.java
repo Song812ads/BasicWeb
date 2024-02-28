@@ -38,6 +38,8 @@ public class WebClientConfig {
 			.csrf((csrf) -> csrf.disable())    
 			.cors(Customizer.withDefaults())
 			.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/product/fetch").permitAll()
+				.requestMatchers("/product/fetchItem/**").permitAll()
 				.anyRequest().authenticated()
 			);
 		http

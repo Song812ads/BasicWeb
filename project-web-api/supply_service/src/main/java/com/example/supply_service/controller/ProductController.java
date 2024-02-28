@@ -1,21 +1,18 @@
 package com.example.supply_service.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.supply_service.entity.Product;
@@ -26,16 +23,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-//@CrossOrigin
 @RequestMapping("/product")
-//@Slf4j
 @RestController
-//@AllArgsConstructor
 public class ProductController {
-	
-//		@Autowired
-//		private final WebClient webClient;
 	
 		@Autowired
 		private ProductRepository repo;
@@ -103,8 +95,7 @@ public class ProductController {
 	   @PreAuthorize("hasRole('supply_client')")
 	   public ResponseEntity<Object> erase (@RequestBody ObjectNode product){
 		   Long id = Long.parseLong(product.get("id").toString().trim());
-		   System.out.println(id);
-		   if (repo.existsById(id)) {
+		   if (!repo.existsById(id)) {
 			   return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		   }
 		   else {
@@ -112,6 +103,18 @@ public class ProductController {
 			   return ResponseEntity.ok().build();
 		   }
 	   }
+	   
+	   @GetMapping("/fetch")
+	   ResponseEntity<Flux<Product>> fetch(){
+		   return ResponseEntity.ok().body(Flux.fromIterable(repo.findAll()));
+	   }
+	   
+	   @GetMapping("/fetchItem")
+	   public ResponseEntity<Mono<Product>> fetchItem(@RequestParam("id")String id){
+		   Long ids = Long.parseLong(id);
+		   return ResponseEntity.ok().body(Mono.justOrEmpty(repo.findById(ids)));
+	   }
 
+	   
 
 }

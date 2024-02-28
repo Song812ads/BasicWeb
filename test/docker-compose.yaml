@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   mongodb:
     container_name: mongodb
     image: mongo
@@ -12,8 +11,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - mongo-data:/data/db
-
-
   zipkin:
     container_name: zipkin
     image: openzipkin/zipkin
@@ -51,8 +48,8 @@ services:
       DB_DATABASE: keycloak
       DB_USER: admin
       DB_PASSWORD: admin
-      # KEYCLOAK_USER: adam
-      # KEYCLOAK_PASSWORD: adam
+      KEYCLOAK_USER: adam
+      KEYCLOAK_PASSWORD: adam
     ports: 
       - 8920:8080
   broker:

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.example.supply_service.config.Department;
 import com.example.supply_service.entity.Product;
 
 import jakarta.transaction.Transactional;

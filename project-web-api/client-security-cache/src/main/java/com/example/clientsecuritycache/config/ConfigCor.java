@@ -31,6 +31,8 @@ public class ConfigCor extends org.springframework.web.cors.CorsConfiguration {
 				.csrf((csrf) -> csrf.disable())    
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(authorize -> authorize
+					.requestMatchers("/app/user/fetch").permitAll()
+					.requestMatchers("/app/user/fetchItem/**").permitAll()
 					.anyRequest().authenticated()
 				);
 			http
@@ -50,7 +52,7 @@ public class ConfigCor extends org.springframework.web.cors.CorsConfiguration {
 	   
 		@Bean
 	    JwtDecoder jwtDecoder() {
-	        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8920/auth/realms/Song_control/protocol/openid-connect/certs").build();
+	        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8920/auth/realms/Song_supply/protocol/openid-connect/certs").build();
 	    }
 	  	
 				  
