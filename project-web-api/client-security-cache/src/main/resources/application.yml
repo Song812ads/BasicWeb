@@ -11,7 +11,7 @@ spring:
   oauth2:
    resourceserver:
     jwt:
-     jwk-set-uri: http://localhost:8920/auth/realms/Song_control/protocol/openid-connect/certs
+     jwk-set-uri: http://localhost:8920/auth/realms/song_client/protocol/openid-connect/certs
   kafka:
     bootstrap-servers: localhost:9092
     producer:

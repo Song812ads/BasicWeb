@@ -59,7 +59,7 @@ public class WebClientConfig {
 	
 	@Bean
     JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8920/auth/realms/Song_supply/protocol/openid-connect/certs").build();
+        return NimbusJwtDecoder.withJwkSetUri("http://localhost:8920/auth/realms/song_supply/protocol/openid-connect/certs").build();
     }
 	
 	@Bean
